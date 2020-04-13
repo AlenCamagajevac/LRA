@@ -1,0 +1,2 @@
+class InvalidConfirmationToken(Exception):
+    pass
