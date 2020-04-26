@@ -4,7 +4,7 @@ import { Button, Input, Layout, StyleService, Text, useStyleSheet } from '@ui-ki
 import { EyeIcon, EyeOffIcon, PersonIcon } from './extra/icons';
 import { KeyboardAvoidingView } from './extra/3rd-party';
 
-export default LoginScreen => {
+export default LoginScreen = ({navigation}) => {
 
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
@@ -13,7 +13,7 @@ export default LoginScreen => {
   const styles = useStyleSheet(themedStyles);
 
   const onSignUpButtonPress = () => {
-    navigation && navigation.navigate('SignUp2');
+    navigation && navigation.navigate('RegisterScreen');
   };
 
   const onForgotPasswordButtonPress = () => {
