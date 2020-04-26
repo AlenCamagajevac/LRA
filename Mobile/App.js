@@ -1,22 +1,24 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { ApplicationProvider } from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { mapping, light as lightTheme } from '@eva-design/eva';
-import NewsScreen  from './src/screens/NewsScreen'
+import LoginScreen  from './src/screens/LoginScreen';
 
-export default function App() {
-  return (
-    <ApplicationProvider mapping={mapping} theme={lightTheme}> 
-      <NewsScreen></NewsScreen>
+// export default function App() {
+//   return (
+//     <ApplicationProvider {...eva} theme={eva.light}> 
+//       <LoginScreen></LoginScreen>
+//     </ApplicationProvider>
+//   );
+// }
+
+const App = () => (
+  <React.Fragment>
+    <IconRegistry icons={EvaIconsPack} />
+    <ApplicationProvider mapping={mapping} theme={lightTheme}>
+      <LoginScreen />
     </ApplicationProvider>
-  );
-}
+  </React.Fragment>
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

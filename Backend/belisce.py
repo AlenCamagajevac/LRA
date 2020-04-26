@@ -11,7 +11,6 @@ from core.seed_data.database_seed import DatabaseSeeder
 from core.logging.access_log import init_access_logger
 from core.metrics.prometheus import metrics
 from mail import mail
-from task_queue.task_queue import celery
 
 log = logging.getLogger(__name__)
 
@@ -26,9 +25,6 @@ def create_app():
         app.config.from_object("config.TestingConfig")
     else:
         app.config.from_object("config.DevelopmentConfig")
-
-    # Init task queue
-    celery.init_app(app)
 
     # Initialize logs
     logging.config.dictConfig(

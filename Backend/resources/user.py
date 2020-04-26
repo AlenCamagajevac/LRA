@@ -10,7 +10,7 @@ from schemas.error.error_response_schema import ErrorResponseSchema
 from schemas.user.update_user_schema import UpdateUserSchema
 from core.enum.role_enum import RoleTypes
 from core.auth.jwt import jwt_required
-from task_queue.tasks.mail_handler import send_confirmation_token
+from core.mail.mail_handler import send_confirmation_token
 from dao.user.user import User
 from marshmallow import ValidationError
 from uuid import UUID
@@ -76,7 +76,7 @@ class UsersResource(Resource):
 
         # Send confirmation mail that user was created
         if app.config['REQUIRE_MAIL_CONFIRMATION']:
-            send_confirmation_token.delay(user.email)
+            send_confirmation_token(user.email)
         else:
             user.confirm_account()
 

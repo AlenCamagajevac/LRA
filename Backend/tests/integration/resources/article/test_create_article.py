@@ -8,7 +8,7 @@ def test_admin_creates_article(app, seeded_database, admin_access_token_header, 
     new_article_info = {
         'title': 'Test Title',
         'content': 'Test Content',
-        'category_uuid': str(category.uuid)
+        'category_id': str(category.id)
     }
 
     # When

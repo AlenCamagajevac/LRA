@@ -8,15 +8,15 @@ class CreateArticleSchema(Schema):
         required=True, validate=validate.Length(min=3, max=200))
     content = fields.Str(
         required=True, validate=validate.Length(min=3, max=10_000))
-    category_uuid = fields.UUID(required=True)
+    category_id = fields.Integer(required=True)
 
     @post_load
     def make_article(self, data, **kwargs):
         # check if category exists
-        category = Category.find_by_uuid(data['category_uuid'])
+        category = Category.find_by_id(data['category_id'])
         if not category:
             raise ValidationError('Category with given uuid does not exist')
-        del data['category_uuid']
+        del data['category_id']
 
         article = Article(**data)
         article.category = category

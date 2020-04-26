@@ -15,7 +15,7 @@ from schemas.article.update_article_schema import UpdateArticleSchema
 from uuid import UUID
 from schemas.error.error_response_schema import ErrorResponseSchema
 from core.utils.date_converter import toDate
-from task_queue.tasks.mail_handler import send_notification_mail
+from core.mail.mail_handler import send_notification_mail
 
 from logging import getLogger
 
@@ -73,7 +73,7 @@ class ArticlesResource(Resource):
 
         # Send notification that there is new article
         users_to_notify = User.find_with_mail_notifications_enabled()
-        send_notification_mail.delay(
+        send_notification_mail(
             [user.email for user in users_to_notify],
             article.title,
             article.uuid

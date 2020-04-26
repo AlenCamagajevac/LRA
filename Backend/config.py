@@ -32,14 +32,6 @@ class Config():
     # Notification settings
     ARTICLE_DETAILS_ENDPOINT = 'localhost:5000/api/article'
 
-    # Task queue
-    CELERY_IMPORTS = (
-        'task_queue.tasks.mail_handler.send_notification_mail',
-        'task_queue.tasks.mail_handler.send_confirmation_token'
-    )
-    CELERY_BROKER_URL = 'redis://localhost:6379/1'
-    CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
 
 class ProductionConfig(Config):
     DEBUG = False

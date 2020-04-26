@@ -7,8 +7,6 @@ from belisce import create_app
 from pytest import fixture
 from flask_jwt_extended import create_access_token, create_refresh_token
 from core.seed_data.database_seed import DatabaseSeeder
-from task_queue.make_celery import celery
-from task_queue.init_celery import init_celery
 
 
 @fixture(autouse=True, scope='function')
@@ -20,15 +18,6 @@ def app():
         yield app
         db.session.remove()
         db.drop_all()
-
-
-@fixture(scope='function')
-def celery_parameters(app):
-    init_celery(celery, app)
-    return {
-        'task_cls': celery.Task,
-        'strict_typing': False,
-    }
 
 
 @fixture(scope='function')

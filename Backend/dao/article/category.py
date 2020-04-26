@@ -20,6 +20,10 @@ class Category(BaseModel):
     def find_by_uuid(cls, uuid):
         return cls.query.filter_by(uuid=uuid).first()
 
+    @classmethod
+    def find_by_id(cls, id):
+        return cls.query.filter_by(id=id).first()
+
     def commit(self):
         db.session.add(self)
         db.session.commit()

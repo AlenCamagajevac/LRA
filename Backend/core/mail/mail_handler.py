@@ -1,8 +1,8 @@
+from threading import Thread
 from flask import current_app as app
 from flask import render_template
 from flask_mail import Message
 from mail import mail
-from task_queue.task_queue import celery
 
 from itsdangerous import URLSafeTimedSerializer
 
@@ -11,7 +11,6 @@ from logging import getLogger
 log = getLogger(__name__)
 
 
-@celery.task()
 def send_notification_mail(emails, article_title, article_uuid):
     article_url = f"{app.config['ARTICLE_DETAILS_ENDPOINT']}/" + \
             f"{article_uuid}"
@@ -22,24 +21,26 @@ def send_notification_mail(emails, article_title, article_uuid):
         article_url=article_url
     )
 
-    # Open mail connection
-    with mail.connect() as conn:
+    messages = []
 
-        # For each user send mail notification
-        for email in emails:
+    # For each user send mail notification
+    for email in emails:
 
-            subject = f'New article on CBC Clusters app'
-            msg = Message(
-                recipients=[email],
-                html=mail_template,
-                subject=subject
-            )
+        subject = f'New article on CBC Clusters app'
+        msg = Message(
+            recipients=[email],
+            html=mail_template,
+            subject=subject
+        )
+        messages.append(msg)
 
-            log.info(f'Sending notification mail to: {email}')
-            conn.send(msg)
+    # Send mail in another thread
+    thr = Thread(target=send_async_email, args=[
+        app._get_current_object(), messages])
+    thr.start()
+    return thr
 
 
-@celery.task()
 def send_confirmation_token(email):
     log.info(f'Sending confirmation mail to: {email}')
 
@@ -63,4 +64,17 @@ def send_confirmation_token(email):
         recipients=[email],
         html=mail_template
     )
-    mail.send(msg)
+
+    # Send mail in another thread
+    thr = Thread(target=send_async_email, args=[
+        app._get_current_object(), [msg]])
+    thr.start()
+    return thr
+
+
+def send_async_email(app, messages):
+    with app.app_context():
+        # Open mail connection
+        with mail.connect() as conn:
+            for message in messages:
+                conn.send(message)
