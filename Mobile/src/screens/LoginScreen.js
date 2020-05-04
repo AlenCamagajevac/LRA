@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
-import { Button, Input, Layout, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { Button, Input, Layout, StyleService, Text, useStyleSheet, Popover } from '@ui-kitten/components';
 import { EyeIcon, EyeOffIcon, PersonIcon } from './extra/icons';
 import { KeyboardAvoidingView } from './extra/3rd-party';
+import { Context } from '../context/AuthContext';
 
-export default LoginScreen = ({navigation}) => {
+export default LoginScreen = ({ navigation }) => {
+  const { state, signin, clearErrorMessage } = useContext(Context);
 
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
@@ -20,9 +22,21 @@ export default LoginScreen = ({navigation}) => {
     navigation && navigation.navigate('ForgotPassword');
   };
 
-  const onPasswordIconPress = ()=> {
+  const onPasswordIconPress = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  const onSignInButtonPress = () => {
+    console.log(email, password);
+    signin({ email, password });
+  }
+
+  const PopoverContent = () => (
+    <Layout style={styles.popoverContent}>
+      <Text>{ state.errorMessage }</Text>
+    </Layout>
+  );
+
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -67,11 +81,20 @@ export default LoginScreen = ({navigation}) => {
           </Button>
         </View>
       </Layout>
-      <Button
-        style={styles.signInButton}
-        size='giant'>
-        SIGN IN
-      </Button>
+
+      <Popover
+        visible={state.errorMessage ? true : false}
+        placement={'top'}
+        content={PopoverContent()}
+        onBackdropPress={clearErrorMessage}>
+        <Button
+          style={styles.signInButton}
+          size='giant'
+          onPress={onSignInButtonPress}>
+          SIGN IN
+        </Button>
+      </Popover>
+
       <Button
         style={styles.signUpButton}
         appearance='ghost'
@@ -114,6 +137,17 @@ const themedStyles = StyleService.create({
   },
   passwordInput: {
     marginTop: 16,
+  },
+  errorMessage: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+    paddingVertical: 8,
+  },
+  popoverContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
   },
   forgotPasswordButton: {
     paddingHorizontal: 0,

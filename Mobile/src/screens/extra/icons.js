@@ -21,3 +21,11 @@ export const EmailIcon = (style) => (
 export const PlusIcon = (style) => (
   <Icon {...style} name='plus'/>
 );
+
+export const HeartIcon = (style) => (
+  <Icon {...style} name='heart'/>
+);
+
+export const MessageCircleIcon = (style) => (
+  <Icon {...style} name='message-circle-outline'/>
+);
