@@ -1,9 +1,7 @@
 {
   "expo": {
-    "name": "Blank Template",
+    "name": "Mobile",
     "slug": "Mobile",
-    "privacy": "public",
-    "sdkVersion": "37.0.0",
     "platforms": [
       "ios",
       "android",

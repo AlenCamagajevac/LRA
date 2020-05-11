@@ -1,37 +1,19 @@
 import React from 'react';
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { mapping, light as lightTheme } from '@eva-design/eva';
-import LoginScreen  from './src/screens/LoginScreen';
-import RegisterScreen from './src/screens/RegisterScreen';
-import NewsScreen from './src/screens/NewsScreen';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { Provider as AuthProvider } from './src/context/AuthContext';
+import { StyleSheet, Text, View } from 'react-native';
 
-const navigator = createStackNavigator(
-  {
-    NewsScreen: NewsScreen,
-    LoginScreen: LoginScreen,
-    RegisterScreen: RegisterScreen
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  {
-    initialRouteName: 'LoginScreen',
-    defaultNavigationOptions: {
-      headerShown: false
-    }
-  }
-);
-
-const App = createAppContainer(navigator);
-
-export default () => (
-  <React.Fragment>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider mapping={mapping} theme={lightTheme}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </ApplicationProvider>
-  </React.Fragment>
-);
+});
