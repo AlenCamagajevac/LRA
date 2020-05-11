@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { Button, Input, Layout, StyleService, Text, useStyleSheet, Popover } from '@ui-kitten/components';
-import { EyeIcon, EyeOffIcon, PersonIcon } from '../../screens/extra/icons';
-import { KeyboardAvoidingView } from '../../screens/extra/3rd-party';
-import { Context } from '../../context/AuthContext';
+import { EyeIcon, EyeOffIcon, PersonIcon } from './extra/icons';
+import { KeyboardAvoidingView } from './extra/3rd-party';
+import { Context } from '../context/AuthContext';
 
-export default LogInScreen = ({ navigation }) => {
+export default LoginScreen = ({ navigation }) => {
   const { state, signin, clearErrorMessage } = useContext(Context);
 
   const [email, setEmail] = React.useState();
@@ -27,6 +27,7 @@ export default LogInScreen = ({ navigation }) => {
   };
 
   const onSignInButtonPress = () => {
+    console.log(email, password);
     signin({ email, password });
   }
 

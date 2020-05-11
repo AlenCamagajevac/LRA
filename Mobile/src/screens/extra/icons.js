@@ -29,23 +29,3 @@ export const HeartIcon = (style) => (
 export const MessageCircleIcon = (style) => (
   <Icon {...style} name='message-circle-outline'/>
 );
-
-export const MenuIcon = (style) => (
-  <Icon {...style} name='more-vertical'/>
-);
-
-export const InfoIcon = (style) => (
-  <Icon {...style} name='info'/>
-);
-
-export const LogoutIcon = (style) => (
-  <Icon {...style} name='log-out'/>
-);
-
-export const SettingsIcon = (style) => (
-  <Icon {...style} name='settings-outline'/>
-);
-
-export const ArrowIosBackIcon = (props) => (
-  <Icon {...props} name='arrow-ios-back'/>
-);

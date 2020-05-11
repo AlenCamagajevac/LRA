@@ -1,89 +1,68 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ImageBackground, View } from 'react-native';
-import { Button, Card, Layout, List, Text, Spinner, StyleService, useStyleSheet } from '@ui-kitten/components';
-import { Context } from '../context/ArticleContext';
+import React from 'react';
+import { ImageBackground, StyleSheet, View } from 'react-native';
+import { Avatar, Button, Card, Layout, List, Text } from '@ui-kitten/components';
+import { HeartIcon, MessageCircleIcon } from './extra/icons';
 
-export default NewsScreen = ({ navigation }) => {
+const data = [ ];
 
-  const articleListRef = React.useRef()
-
-  const styles = useStyleSheet(themedStyles);
-
-  const { state, getArticles } = useContext(Context);
-  const [endReached, setEndReached] = useState(false);
-
-
-  useEffect(() => {
-    getArticles(1, '2020-04-28', '2020-05-06', 'Descending');
-  }, []);
-
-  const listEndReached = () => {
-    if (state.hasNext) {
-      getArticles(state.currentPage + 1, '2020-04-28', '2020-05-06', 'Descending');
-    } else {
-      setEndReached(true);
-    }
-  }
+export default ({ navigation }) => {
 
   const onItemPress = (index) => {
-    console.log('pressed article!');
+    navigation && navigation.navigate('Article1');
   };
 
-  const scrollToTop = () => {
-    articleListRef.current.scrollToOffset({ animated: true, offset: 0 })
-  };
-
-  const renderlistFooter = () => (
-    <Layout>
-      {endReached ? <Button
-        style={styles.endButton}
-        size='giant'
-        onPress={scrollToTop}>
-        scrollToTop
-     </Button> : <Layout style={styles.spinnerContent}>
-          <Spinner size='large' />
-        </Layout>}
-    </Layout>
-  );
-
-
-  const renderItemHeader = (article) => (
+  const renderItemHeader = (info) => (
     <ImageBackground
       style={styles.itemHeader}
-      source={article.item.image}
+      source={info.item.image}
     />
   );
 
-  const renderItemFooter = (article) => (
+  const renderItemFooter = (info) => (
     <View style={styles.itemFooter}>
+      <Avatar source={info.item.author.photo}/>
       <View style={styles.itemAuthoringContainer}>
         <Text
           category='s2'>
-          {article.item.user.email}
+          {info.item.author.fullName}
         </Text>
         <Text
           appearance='hint'
           category='c1'>
-          {article.item.created_date}
+          {info.item.date}
         </Text>
       </View>
+      <Button
+        style={styles.iconButton}
+        appearance='ghost'
+        status='basic'
+        icon={MessageCircleIcon}>
+        {`${info.item.comments.length}`}
+      </Button>
+      <Button
+        style={styles.iconButton}
+        appearance='ghost'
+        status='danger'
+        icon={HeartIcon}>
+        {`${info.item.likes.length}`}
+      </Button>
     </View>
   );
 
-  const renderItem = (article) => (
+  const renderItem = (info) => (
     <Card
       style={styles.item}
-      header={() => renderItemHeader(article)}
-      footer={() => renderItemFooter(article)}
-      onPress={() => onItemPress(article.uuid)}>
+      header={() => renderItemHeader(info)}
+      footer={() => renderItemFooter(info)}
+      onPress={() => onItemPress(info.index)}>
       <Text category='h5'>
-        {article.item.title}
+        {info.item.title}
       </Text>
       <Text
         style={styles.itemContent}
         appearance='hint'
         category='s1'>
-        {article.item.preview}
+        {`${info.item.content.substring(0, 82)}...`}
       </Text>
     </Card>
   );
@@ -93,21 +72,16 @@ export default NewsScreen = ({ navigation }) => {
       style={styles.container}
       level='2'>
       <List
-        ref={articleListRef}
         style={styles.list}
         contentContainerStyle={styles.listContent}
-        data={state.articles}
+        data={data}
         renderItem={renderItem}
-        onEndReached={listEndReached}
-        onEndReachedThreshold={0.5}
-        ListFooterComponent={renderlistFooter}
       />
     </Layout>
-
   );
 };
 
-const themedStyles = StyleService.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -139,19 +113,4 @@ const themedStyles = StyleService.create({
     justifyContent: 'center',
     marginHorizontal: 16,
   },
-  popoverContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 24,
-  },
-  spinnerContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: 'background-basic-color-2',
-  },
-  endButton: {
-    marginTop: 15,
-    marginHorizontal: 16,
-  }
 });

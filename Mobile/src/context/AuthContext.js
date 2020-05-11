@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import createDataContext from './CreateDataContext';
 import client from '../api/client';
-import { navigate } from '../NavigationRef';
+// import { navigate } from '../navigationRef';
 
 var jwtDecode = require('jwt-decode');
 
@@ -60,9 +60,8 @@ const signin = dispatch => async ({ email, password }) => {
         // Decode token
         var userInfo = jwtDecode(response.data.access_token);
         dispatch({ type: 'signin', payload: userInfo.user_claims });
-        navigate('NewsScreen');
     } catch (err) {
-        console.log(err.response);
+        console.log(err.response.data);
         dispatch({
             type: 'add_error',
             payload: 'Something went wrong with sign in'
