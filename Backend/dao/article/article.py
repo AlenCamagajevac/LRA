@@ -11,10 +11,16 @@ class Article(BaseModel):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), unique=False, nullable=False)
     content = db.Column(db.Text, unique=False, nullable=False)
-    preview = column_property(func.substring(content, 0, 50) + '...')
+    preview = column_property(func.substring(content, 0, 89) + '...')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     category_id = db.Column(
         db.Integer, db.ForeignKey('categories.id'), nullable=False)
+
+    # One article has many images
+    images = db.relationship(
+        'Image', lazy='subquery', backref=db.backref(
+            'article', lazy='joined')
+    )
 
     def __repr__(self):
         return '<Article %r>' % self.title
@@ -26,6 +32,8 @@ class Article(BaseModel):
     @classmethod
     def find_all_articles(cls, filter_params):
         query = cls.query
+
+        query = query.filter(cls.title.like(f'%{filter_params["query"]}%'))
 
         if filter_params['from']:
             query = query.filter(cls.created_date >= filter_params['from'])

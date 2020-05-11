@@ -16,6 +16,7 @@ from uuid import UUID
 from schemas.error.error_response_schema import ErrorResponseSchema
 from core.utils.date_converter import toDate
 from core.mail.mail_handler import send_notification_mail
+from core.utils.store_image import upload_request_files
 
 from logging import getLogger
 
@@ -55,7 +56,7 @@ class ArticlesResource(Resource):
 
         # Check if article is valid
         try:
-            article = self.create_article_schema.load(api.payload)
+            article = self.create_article_schema.load(request.form.to_dict())
         except ValidationError as err:
             error_response = self.error_schema.dump(ErrorResponse(
                 details=err.messages,
@@ -64,6 +65,10 @@ class ArticlesResource(Resource):
             log.info(
                 f'Validation errors during article creation: {error_response}')
             return error_response, 400
+
+        # Try to save images to AWS
+        saved_images = upload_request_files(request.files)
+        article.images = saved_images
 
         # Add user to article
         article.user = user
@@ -92,7 +97,9 @@ class ArticlesResource(Resource):
                 'from': request.args.get('from', default=None, type=toDate),
                 'to': request.args.get('to', default=None, type=toDate),
                 'sort': request.args.get(
-                    'sort', default=OrderType.DESCENDING, type=OrderType)
+                    'sort', default=OrderType.DESCENDING, type=OrderType),
+                'query': request.args.get(
+                    'query', default='', type=str)
             }
         except ValueError:
             error_schema = ErrorResponseSchema()
