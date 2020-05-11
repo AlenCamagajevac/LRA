@@ -1,19 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { light, mapping } from '@eva-design/eva';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { AppNavigator } from './navigation/app.navigator';
+import { AppRoute } from './navigation/app-routes';
 
-export default function App() {
+export default () => {
+
+  // This value is used to determine the initial screen
+  const isAuthorized = false;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <React.Fragment>
+      <IconRegistry icons={EvaIconsPack}/>
+      <ApplicationProvider
+        mapping={mapping}
+        theme={light}>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <AppNavigator initialRouteName={isAuthorized ? AppRoute.HOME : AppRoute.AUTH}/>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </ApplicationProvider>
+    </React.Fragment>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};
