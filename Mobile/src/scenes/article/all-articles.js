@@ -15,7 +15,7 @@ import { SearchIcon } from '../../../assets/icons';
 const allTodos = [
 ];
 
-export const TodoInProgressScreen = (props) => {
+export const AllArticlesScreen = (props) => {
 
   const [todos, setTodos] = React.useState(allTodos);
   const [query, setQuery] = React.useState('');

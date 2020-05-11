@@ -6,7 +6,7 @@ import { Toolbar } from '../../components/toolbar.component';
 import { ImageOverlay } from '../../components/image-overlay.component';
 import { ProgressBar } from '../../components/progress-bar.component';
 
-export const TodoDetailsScreen = (props) => {
+export const ArticleDetailsScreen = (props) => {
 
   const { todo } = props.route.params;
   const insets = useSafeArea();

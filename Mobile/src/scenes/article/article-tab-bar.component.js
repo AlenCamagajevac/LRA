@@ -14,7 +14,7 @@ const menu = [
   { title: 'Log Out', icon: LogoutIcon },
 ];
 
-export const TodoTabBar = (props) => {
+export const ArticleTabBar = (props) => {
 
   const onMenuItemSelect = (index) => {
     const { [index]: selectedItem } = menu;

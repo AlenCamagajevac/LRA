@@ -1,22 +1,21 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { TodoNavigator } from './todo.navigator';
+import { ArticleNavigator } from './article.navigator';
 import { ProfileNavigator } from './profile.navigator';
 import { AppRoute } from './app-routes';
 import { AboutScreen, HomeDrawer, HomeTabBar } from '../scenes/home';
 import { HomeIcon, InfoIcon, LayoutIcon, PersonIcon } from '../../assets/icons';
 
+
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
 
-
 const HomeBottomNavigator = () => (
-  // @ts-ignore: `tabBar` also contains a DrawerNavigationProp
   <BottomTab.Navigator tabBar={HomeTabBar}>
     <BottomTab.Screen
-      name={AppRoute.TODO}
-      component={TodoNavigator}
+      name={AppRoute.ARTICLE}
+      component={ArticleNavigator}
       options={{ title: 'TODO', tabBarIcon: LayoutIcon }}
     />
     <BottomTab.Screen
@@ -28,7 +27,6 @@ const HomeBottomNavigator = () => (
 );
 
 export const HomeNavigator = () => (
-  // @ts-ignore: `drawerContent` also contains a DrawerNavigationProp
   <Drawer.Navigator drawerContent={HomeDrawer}>
     <Drawer.Screen
       name={AppRoute.HOME}
