@@ -4,8 +4,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { light, mapping } from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { AppNavigator } from './navigation/app.navigator';
-import { AppRoute } from './navigation/app-routes';
+import { AppNavigator } from './src/navigation/app.navigator';
+import { AppRoute } from './src/navigation/app-routes';
 
 export default () => {
 

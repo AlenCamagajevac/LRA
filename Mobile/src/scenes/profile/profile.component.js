@@ -6,7 +6,7 @@ import {
   SafeAreaLayout,
   SaveAreaInset,
 } from '../../components/safe-area-layout.component';
-import { MenuIcon } from '../../assets/icons';
+import { MenuIcon } from '../../../assets/icons';
 
 export const ProfileScreen = (props) => (
   <SafeAreaLayout

@@ -15,7 +15,7 @@ export const TodoDetailsScreen = (props) => {
     <React.Fragment>
       <ImageOverlay
         style={[styles.appBar, { paddingTop: insets.top }]}
-        source={require('../../assets/image-background.jpeg')}>
+        source={require('../../../assets/image-background.jpeg')}>
         <Toolbar
           appearance='control'
           onBackPress={props.navigation.goBack}

@@ -5,7 +5,9 @@ import {
   SafeAreaLayout,
   SaveAreaInset,
 } from '../../components/safe-area-layout.component';
-import { InfoIcon, LogoutIcon, MenuIcon } from '../../assets/icons';
+
+import { Toolbar } from '../../components/toolbar.component';
+import { InfoIcon, LogoutIcon, MenuIcon } from '../../../assets/icons';
 
 const menu = [
   { title: 'About', icon: InfoIcon },

@@ -5,7 +5,7 @@ import { Drawer } from '@ui-kitten/components';
 const DrawerHeader = () => (
   <ImageBackground
     style={styles.header}
-    source={require('../../assets/image-background.jpeg')}
+    source={require('../../../assets/image-background.jpeg')}
   />
 );
 

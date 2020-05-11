@@ -10,19 +10,9 @@ import {
 } from '@ui-kitten/components';
 import { AppRoute } from '../../navigation/app-routes';
 import { ProgressBar } from '../../components/progress-bar.component';
-import { SearchIcon } from '../../assets/icons';
-import { Todo } from '../../data/todo.model';
+import { SearchIcon } from '../../../assets/icons';
 
 const allTodos = [
-  Todo.mocked0(),
-  Todo.mocked1(),
-  Todo.mocked2(),
-  Todo.mocked0(),
-  Todo.mocked1(),
-  Todo.mocked2(),
-  Todo.mocked0(),
-  Todo.mocked1(),
-  Todo.mocked2(),
 ];
 
 export const TodoInProgressScreen = (props) => {
@@ -76,7 +66,7 @@ export const TodoInProgressScreen = (props) => {
       />
       <List
         style={styles.list}
-        data={todos}
+        data={allTodos}
         renderItem={renderTodo}
       />
     </Layout>

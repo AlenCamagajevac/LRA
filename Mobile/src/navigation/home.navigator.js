@@ -5,7 +5,7 @@ import { TodoNavigator } from './todo.navigator';
 import { ProfileNavigator } from './profile.navigator';
 import { AppRoute } from './app-routes';
 import { AboutScreen, HomeDrawer, HomeTabBar } from '../scenes/home';
-import { HomeIcon, InfoIcon, LayoutIcon, PersonIcon } from '../assets/icons';
+import { HomeIcon, InfoIcon, LayoutIcon, PersonIcon } from '../../assets/icons';
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();

@@ -3,8 +3,8 @@ import { useSafeArea } from 'react-native-safe-area-context';
 import { Layout } from '@ui-kitten/components';
 
 export const SaveAreaInset = {
-  TOP = 'top',
-  BOTTOM = 'bottom',
+  TOP: 'top',
+  BOTTOM: 'bottom',
 }
 
 export const SafeAreaLayout = (props) => {

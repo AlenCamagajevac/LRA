@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from '@ui-kitten/components';
 import { useFormikContext } from 'formik';
-import { AlertTriangleIcon } from '../assets/icons';
+import { AlertTriangleIcon } from '../../assets/icons';
 
 
 export const FormInput = ({ id, ...inputProps }) => {

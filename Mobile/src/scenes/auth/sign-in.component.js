@@ -4,7 +4,7 @@ import { Button, CheckBox, Layout } from '@ui-kitten/components';
 import { Formik } from 'formik';
 import { AppRoute } from '../../navigation/app-routes';
 import { FormInput } from '../../components/form-input.component';
-import { EyeIcon, EyeOffIcon } from '../../assets/icons';
+import { EyeIcon, EyeOffIcon } from '../../../assets/icons';
 import { SignInData, SignInSchema } from '../../data/sign-in.model';
 
 export const SignInScreen = (props) => {
@@ -74,7 +74,7 @@ export const SignInScreen = (props) => {
     <React.Fragment>
       <ImageBackground
         style={styles.appBar}
-        source={require('../../assets/image-background.jpeg')}
+        source={require('../../../assets/image-background.jpeg')}
       />
       <Layout style={styles.formContainer}>
         <Formik

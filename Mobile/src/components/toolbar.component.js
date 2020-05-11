@@ -4,7 +4,7 @@ import {
   TopNavigation,
   TopNavigationAction
 } from '@ui-kitten/components';
-import { BackIcon, MoreVerticalIcon } from '../assets/icons';
+import { BackIcon, MoreVerticalIcon } from '../../assets/icons';
 
 
 export const Toolbar = (props) => {

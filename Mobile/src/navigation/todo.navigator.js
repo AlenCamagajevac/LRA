@@ -8,7 +8,7 @@ import {
   TodoInProgressScreen,
   TodoTabBar,
 } from '../scenes/todo';
-import { DoneAllIcon, GridIcon } from '../assets/icons';
+import { DoneAllIcon, GridIcon } from '../../assets/icons';
 
 
 const Stack = createStackNavigator();
