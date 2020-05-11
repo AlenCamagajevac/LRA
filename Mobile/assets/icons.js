@@ -57,6 +57,10 @@ export const SearchIcon = (style) => (
   <Icon {...style} name='search-outline'/>
 );
 
+export const CalendarIcon = (style) => (
+  <Icon {...style} name='calendar'/>
+);
+
 
 
 
