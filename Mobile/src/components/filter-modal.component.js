@@ -17,7 +17,7 @@ export const FilterModal = ({ fromDate, toDate, sort, sortOptions, onFilterApply
 
   const [fromDateFilter, setFromDateFilter] = React.useState(fromDate);
   const [toDateFilter, setToDateFilter] = React.useState(toDate);
-  const [sortFilter, setSortFilter] = React.useState(sortOptions[0].text);
+  const [sortFilter, setSortFilter] = React.useState(sort);
 
   return (
     <View style={themedStyles.formContainer}>
@@ -47,13 +47,17 @@ export const FilterModal = ({ fromDate, toDate, sort, sortOptions, onFilterApply
         placeholder={sortFilter}
         label='Sort Order'
         data={sortOptions}
-        selectedOption={sortOptions[0].text}
+        selectedOption={sort}
         onSelect={(select) => setSortFilter(select.text)}
         textStyle={themedStyles.selectText}
       />
       <Button
         style={styles.filterButton}
-        onPress={() => onFilterApply({ fromDateFilter, toDateFilter, sortFilter })}
+        onPress={() => onFilterApply({ 
+          fromDate: fromDateFilter, 
+          toDate: toDateFilter, 
+          sort: sortFilter 
+        })}
         appearance='ghost'
         status='basic'>
         Apply filter

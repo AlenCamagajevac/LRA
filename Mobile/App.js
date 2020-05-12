@@ -6,6 +6,7 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './src/navigation/app.navigator';
 import { AppRoute } from './src/navigation/app-routes';
+import { Provider as ArticleContext } from './src/context/article.context';
 
 export default () => {
 
@@ -14,14 +15,16 @@ export default () => {
 
   return (
     <React.Fragment>
-      <IconRegistry icons={EvaIconsPack}/>
+      <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider
         mapping={mapping}
         theme={light}>
         <SafeAreaProvider>
-          <NavigationContainer>
-            <AppNavigator initialRouteName={isAuthorized ? AppRoute.HOME : AppRoute.AUTH}/>
-          </NavigationContainer>
+          <ArticleContext>
+            <NavigationContainer>
+              <AppNavigator initialRouteName={isAuthorized ? AppRoute.HOME : AppRoute.AUTH} />
+            </NavigationContainer>
+          </ArticleContext>
         </SafeAreaProvider>
       </ApplicationProvider>
     </React.Fragment>
