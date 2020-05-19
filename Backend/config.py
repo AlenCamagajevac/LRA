@@ -17,7 +17,7 @@ class Config():
 
     # gmail authentication
     MAIL_USERNAME = 'alen.camagajevac@gmail.com'
-    MAIL_PASSWORD = 'blackdog12'
+    MAIL_PASSWORD = 'pass'
 
     # mail accounts
     MAIL_DEFAULT_SENDER = ('no-reply', 'no-reply@belisce.hr')
